@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="zyproduct_template_tree_view_extended" model="ir.ui.view">
+        <field name="name">Product Line and Partnumber</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_tree_view" />
+        <field name="arch" type="xml">
+            <tree string="Product" multi_edit="1" sample="1">
+                <field name="productline" />
+                <field name="partnumber" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="product_template_only_form_view_extended" model="ir.ui.view">
+        <field name="name">product line and partnumber</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_only_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="attributes">
+                <attribute name="name">Product Template</attribute>
+            </xpath>
+            <field name="categ_id" position="after">
+                <field name="productline"/>
+                    <field name="partnumber"/>
+
+                <field name="default_code" attrs="{'invisible': [('product_variant_count', '>', 1)]}"/>
+                <field name="barcode" attrs="{'invisible': [('product_variant_count', '>', 1)]}"/>
+            </field>
+        </field>
+    </record>
+</odoo>

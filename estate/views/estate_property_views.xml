@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="estate_property_tree_view" model="ir.ui.view">
+        <field name="name">Estate Property Ads</field>
+        <field name="model">estate.property</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" string="Title"></field>
+                <field name="postcode" string="Postcode"></field>
+                <field name="bedrooms" string="Bedrooms"></field>
+                <field name="living_area" string="Living Area"></field>
+                <field name="expected_price" string="Expected Price"></field>
+                <field name="selling_price" string="Selling Price"></field>
+                <field name="date_availability" string="Available From"></field>
+            </tree>
+        </field>
+    </record>
+
+    <record id="estate_property_form_view" model="ir.ui.view">
+        <field name="name">Estate Property Ads</field>
+        <field name="model">estate.property</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <h1>
+                        <field name="name" string="Title"></field>
+                    </h1>
+                    <field name="tag_ids" widget="many2many_tags"/>
+                    <group>
+                        <group>
+                            <field name="postcode" string="Postcode"></field>
+                            <field name="date_availability" string="Available From"></field>
+                            <field name="property_type_id"></field>
+                        </group>
+                        <group>
+                            <field name="expected_price" string="Expected Price"></field>
+                            <field name="selling_price" string="Selling Price"></field>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Description">
+                            <group>
+                                <field name="description"></field>
+                                <field name="bedrooms"></field>
+                                <field name="living_area"></field>
+                                <field name="facades"></field>
+                                <field name="garage"></field>
+                                <field name="garden"></field>
+                                <field name="garden_area"></field>
+                                <field name="garden_orientation"></field>
+                            </group>
+                        </page>
+                        <page string="Other Information">
+                            <group>
+                                <field name="saleman"/>
+                                <field name="buyer"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="estate_property_search_view" model="ir.ui.view">
+        <field name="name">Estate Property Ads</field>
+        <field name="model">estate.property</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" string="Name" />
+                <field name="postcode" string="Postcode" />
+                <filter name="Bedrooms" domain="[('bedrooms', '>', 3)]"></filter>
+                <group string="group by">
+                    <filter name="orientation" string="orientation" context="{'group_by': 'garden_orientation'}"></filter>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="estate_property_act_window" model='ir.actions.act_window'>
+        <field name="name">Estate Property Ads</field>
+        <field name="res_model">estate.property</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="estate_property_menu_action" sequence="20" name="Estate Property Ads"/>
+    <menuitem id="estate_property_menu_action_lv2" 
+        sequence="20"
+        name="Estate Property Ads Lv2"
+        parent="estate_property_menu_action" 
+        action="estate_property_act_window"/>
+
+</odoo>
